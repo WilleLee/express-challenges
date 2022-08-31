@@ -11,12 +11,14 @@ Thus we could create some controllers that do not end the connection by using _n
 ```javascript
 // ./src/middlewares
 export const urlLogger = (req, res, next) => {
+  // middleware that logs the recent path
   const { path } = req;
   console.log(`Path: ${path}`);
   return next();
 };
 
 export const timeLogger = (req, res, next) => {
+  // middleware that logs the date of when the route happens
   const date = new Date(Date.now());
   const y = date.getFullYear();
   const m = date.getMonth() + 1;
@@ -26,6 +28,7 @@ export const timeLogger = (req, res, next) => {
 };
 
 export const securityLogger = (req, res, next) => {
+  // middleware that defines if the environment uses the https protocol or not
   const { protocol } = req;
   const security = protocol === "https" ? "Secure" : "Insecure";
   console.log(security);
@@ -33,6 +36,7 @@ export const securityLogger = (req, res, next) => {
 };
 
 export const protectorMiddleware = (req, res, next) => {
+  // middleware that redirect users if they try to reach "/protected" path
   const { path } = req;
   return path === "/protected" ? res.redirect("/") : next();
 };
