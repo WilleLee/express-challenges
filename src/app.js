@@ -1,4 +1,5 @@
 import express from "express";
+import morgan from "morgan";
 import {
   protectorMiddleware,
   securityLogger,
@@ -10,7 +11,13 @@ const heroku = process.env.NODE_ENV;
 const $PORT = heroku ? process.env.PORT : 3000;
 const app = express();
 
-app.get("/", urlLogger, timeLogger, securityLogger, (req, res) => {
+app.use(morgan("dev"));
+// Predefined Formats of morgan
+// "dev" -> :method :url :status :response-time ms - :res[content-length]
+//app.use(morgan(":status :method :url :http-version :response-time ms"));
+// or can customize the set of the morgan notification (https://www.npmjs.com/package/morgan)
+
+app.get("/", securityLogger, (req, res) => {
   return res.send("hi");
 });
 
