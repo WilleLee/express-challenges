@@ -3,17 +3,17 @@ export const home = (req, res) => {
 };
 
 export const trending = (req, res) => {
-  return res.send("trending");
+  return res.render("trending", { pageTitle: "Trending" });
 };
 
 export const news = (req, res) => {
-  return res.send("news");
+  return res.render("news", { pageTitle: "New Stuffs" });
 };
 
 export const join = (req, res) => {
-  return res.send("join");
+  return res.render("join", { pageTitle: "Join" });
 };
 
 export const login = (req, res) => {
-  return res.send("login");
+  return res.render("login", { pageTitle: "Login" });
 };

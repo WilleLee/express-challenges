@@ -4,7 +4,7 @@ import { editProfile, user, users } from "../controllers/usersControllers";
 const usersRouter = express.Router();
 
 usersRouter.get("/", users);
-usersRouter.get("/:id", user);
 usersRouter.get("/edit-profile", editProfile);
+usersRouter.get("/:id", user);
 
 export default usersRouter;
