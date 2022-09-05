@@ -14,6 +14,8 @@ const heroku = process.env.NODE_ENV;
 const $PORT = heroku ? process.env.PORT : 3000;
 const app = express();
 
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views");
 app.use(morgan("dev"));
 // Predefined Formats of morgan
 // "dev" -> :method :url :status :response-time ms - :res[content-length]
