@@ -58,3 +58,8 @@ app.get("/protected", protectorMiddleware, () => {
 ...
 */
 ```
+
+### create routes
+
+### render pages by using pug
+
