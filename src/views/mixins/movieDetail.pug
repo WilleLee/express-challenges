@@ -1,0 +1,6 @@
+mixin movieDetail(movie)
+  div 
+    p=movie.summary 
+    ul
+      each genre of movie.genres
+        li=genre

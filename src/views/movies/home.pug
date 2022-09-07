@@ -1,0 +1,7 @@
+extends ../layout
+include ../mixins/movieList
+
+block route 
+  h2=pageTitle 
+  include ../partials/filterMovies
+  +movieList(movies)

@@ -1,0 +1,6 @@
+extends ../layout 
+include ../mixins/movieDetail
+
+block route
+  if movie
+    +movieDetail(movie)

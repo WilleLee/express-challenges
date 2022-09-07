@@ -7,12 +7,16 @@ import {
   urlLogger,
 } from "./middlewares/middlewares_challenge";
 import globalRouter from "./routers/globalRouter";
+import movieRouter from "./routers/movieRouter";
 import storiesRouter from "./routers/storiesRouter";
 import usersRouter from "./routers/usersRouter";
 
 const heroku = process.env.NODE_ENV;
 const $PORT = heroku ? process.env.PORT : 3000;
 const app = express();
+
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
@@ -25,6 +29,7 @@ app.use(morgan("dev"));
 app.use("/", globalRouter);
 app.use("/users", usersRouter);
 app.use("/stories", storiesRouter);
+app.use("/movies", movieRouter);
 
 app.get("/protected", protectorMiddleware, () => {
   return res.send("hey get the fuck out");
