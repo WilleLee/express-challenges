@@ -1,11 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import {
-  protectorMiddleware,
-  securityLogger,
-  timeLogger,
-  urlLogger,
-} from "./middlewares/middlewares_challenge";
+import { protectorMiddleware } from "./middlewares/middlewares_challenge";
 import globalRouter from "./routers/globalRouter";
 import movieRouter from "./routers/movieRouter";
 import storiesRouter from "./routers/storiesRouter";

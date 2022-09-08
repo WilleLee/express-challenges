@@ -48,3 +48,22 @@ export const getMovieByMinimumRating = (rating) => {
   }
   return movies.filter((m) => m.rating >= rating);
 };
+
+/*
+This adds a movie to the DB.
+Only ONE required argument, it should be an object containing
+  title: string;
+  synopsis: string;
+  genres: Array of strings;
+*/
+
+export const addMovie = ({ title, synopsis, genres }) => {
+  if (typeof title !== "string" || typeof synopsis !== "string") {
+    throw Error("❌  title and synopsis should be strings  ❌");
+  }
+  if (!genres instanceof Array) {
+    throw Error("❌  genres should be an array  ❌");
+  }
+  const id = Math.floor(Math.random() * (title.length + Date.now()));
+  movies = [{ id, title, synopsis, genres }, ...movies];
+};

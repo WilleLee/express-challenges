@@ -3,6 +3,7 @@ import {
   getMovieById,
   getMovieByMinimumYear,
   getMovieByMinimumRating,
+  addMovie,
 } from "../movieDB";
 
 export const movies = (req, res) => {
@@ -14,7 +15,7 @@ export const movieDetail = (req, res) => {
   const movie = getMovieById(id);
   return res.render("movies/movie", { pageTitle: movie.title, movie });
 };
-export const filterMovie = async (req, res) => {
+export const filterMovie = (req, res) => {
   const { year, rating } = req.query;
   const byYear = year ? getMovieByMinimumYear(year) : undefined;
   const byRating = rating ? getMovieByMinimumRating(rating) : undefined;
@@ -38,4 +39,22 @@ export const filterMovie = async (req, res) => {
     pageTitle: `Searching by ${sort}`,
     movies,
   });
+};
+
+export const getAddMovie = (req, res) => {
+  return res.render("movies/addMovie", { pageTitle: "Add Movie" });
+};
+export const postAddMovie = (req, res) => {
+  const { title, synopsis, genres } = req.body;
+  if (!title || !synopsis || !genres) {
+    return res.redirect("/movies/add");
+  }
+  const newMovie = {
+    title,
+    synopsis,
+    genres: genres.split(",").map((genre) => genre.trim()),
+  };
+  addMovie(newMovie);
+  const movies = getMovies();
+  return res.render("movies/home", { pageTitle: "Movies!", movies });
 };
