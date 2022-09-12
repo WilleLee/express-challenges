@@ -1,6 +1,10 @@
-extends ../layout 
+extends ../layouts/layout 
 include ../mixins/movieDetail
 
 block route
-  if movie
-    +movieDetail(movie)
+  +movieDetail(movie)
+  div
+    p
+      a(href=`/movies/${id}/edit`) &rarr; Edit Infos
+    p 
+      a(href=`/movies/${id}/delete`) &rarr; Delete Infos

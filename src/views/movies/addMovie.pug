@@ -1,8 +1,0 @@
-extends ../layout
-
-block route 
-  form(method="POST")
-    input(type="text", name="title", placeholder="movie title", minLength="2", maxLength="12", required)
-    textarea(name="synopsis", placeholder="movie synopsis", rows="5", cols="35", required)
-    input(type="text", name="genres", placeholder="type varied genres using commas", minLength="2", required)
-    button(type="submit") Add Movie

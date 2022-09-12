@@ -1,6 +1,8 @@
 mixin movieDetail(movie)
   div 
-    p=movie.synopsis
+    h2 #{movie.title} (#{movie.year})
+    p=movie.note
+    p=movie.rating
     ul
       each genre of movie.genres
         li=genre

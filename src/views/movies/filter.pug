@@ -1,9 +1,0 @@
-extends ../layout
-include ../mixins/movieList
-
-block route
-  include ../partials/filterMovies
-  +movieList(movies)
-  hr
-  p 
-    a(href="/movies") &larr; go back home

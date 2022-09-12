@@ -1,4 +1,5 @@
-extends layout 
+extends layouts/layout 
+include mixins/movieList
 
 block route 
-  h2 here is home!
+  +movieList(movies)

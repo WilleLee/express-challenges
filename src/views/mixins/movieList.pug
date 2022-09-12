@@ -1,8 +1,8 @@
 mixin movieList(movies)
   div 
-    if !movies
+    if !movies.length
       p there's no movie! 
-    else if movies
+    else
       each movie in movies 
         p
-          a(href="/movies/"+movie.id)=movie.title
+          a(href=`/movies/${movie._id}`)=movie.title

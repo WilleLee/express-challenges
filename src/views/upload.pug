@@ -1,0 +1,10 @@
+extends layouts/layout
+
+block route
+  form(method="POST")
+    input(type="text", name="title", required, minlength="2", placeholder="movie title")
+    input(type="text", name="note", required, minlength="4", placeholder="your notes on the movie")
+    input(type="number", name="rating", required, min="0", max="5", step="0.5", placehodler=2.5)
+    input(type="number", name="year", required, min="1900", max="2300", step="1", placehodler=2022)
+    input(type="text", name="genres", placeholder="divide using commas")
+    input(type="submit", value="upload")

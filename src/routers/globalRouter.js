@@ -1,17 +1,16 @@
 import express from "express";
 import {
+  getUpload,
   home,
   join,
   login,
-  news,
-  trending,
+  postUpload,
 } from "../controllers/globalControllers";
 
 const globalRouter = express.Router();
 
 globalRouter.get("/", home);
-globalRouter.get("/trending", trending);
-globalRouter.get("/news", news);
+globalRouter.route("/upload").get(getUpload).post(postUpload);
 globalRouter.get("/join", join);
 globalRouter.get("/login", login);
 
