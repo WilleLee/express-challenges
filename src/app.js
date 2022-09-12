@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+import "./db";
 import express from "express";
 import morgan from "morgan";
 import { protectorMiddleware } from "./middlewares/middlewares_challenge";

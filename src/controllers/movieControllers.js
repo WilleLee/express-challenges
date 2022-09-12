@@ -55,6 +55,5 @@ export const postAddMovie = (req, res) => {
     genres: genres.split(",").map((genre) => genre.trim()),
   };
   addMovie(newMovie);
-  const movies = getMovies();
-  return res.render("movies/home", { pageTitle: "Movies!", movies });
+  return res.redirect("/movies");
 };

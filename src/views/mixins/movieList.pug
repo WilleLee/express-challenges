@@ -5,4 +5,4 @@ mixin movieList(movies)
     else if movies
       each movie in movies 
         p
-          a(href=movie.id)=movie.title
+          a(href="/movies/"+movie.id)=movie.title
