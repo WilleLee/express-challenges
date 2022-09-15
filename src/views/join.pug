@@ -1,4 +1,9 @@
 extends layouts/layout 
 
 block route 
-  h2 you can join us here
+  include partials/errorMessage
+  form(method="POST")
+    input(type="text", name="username", required, placeholder="username")
+    input(type="password", name="password", required, placeholder="********")
+    input(type="password", name="passwordc", required, placeholder="********")
+    input(type="submit", value="Create Account")

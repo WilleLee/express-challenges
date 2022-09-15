@@ -2,8 +2,14 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import "./db";
 import express from "express";
+//middlewares
+import session from "express-session";
 import morgan from "morgan";
-import { protectorMiddleware } from "./middlewares/middlewares_challenge";
+import {
+  localsMiddleware,
+  protectorMiddleware,
+} from "./middlewares/middlewares_challenge";
+//routers
 import globalRouter from "./routers/globalRouter";
 import movieRouter from "./routers/movieRouter";
 import storiesRouter from "./routers/storiesRouter";
@@ -23,6 +29,15 @@ app.use(morgan("dev"));
 // "dev" -> :method :url :status :response-time ms - :res[content-length]
 //app.use(morgan(":status :method :url :http-version :response-time ms"));
 // or can customize the set of the morgan notification (https://www.npmjs.com/package/morgan)
+
+app.use(
+  session({
+    secret: "hihihihi",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(localsMiddleware);
 
 app.use("/", globalRouter);
 app.use("/users", usersRouter);

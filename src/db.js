@@ -8,5 +8,5 @@ try {
   console.log("✅ connected to the database");
 } catch (error) {
   console.log(error.message);
-  console.log("❗️ cannot access to the database");
+  console.log("❗️ cannot access the database");
 }
