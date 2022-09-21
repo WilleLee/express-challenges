@@ -1,6 +1,7 @@
 extends layouts/layout
 
 block route
+  include partials/errorMessage
   form(method="POST")
     input(type="text", name="title", required, minlength="2", placeholder="movie title")
     input(type="text", name="note", required, minlength="4", placeholder="your notes on the movie")

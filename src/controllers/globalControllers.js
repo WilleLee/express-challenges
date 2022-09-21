@@ -13,7 +13,8 @@ export const postUpload = async (req, res) => {
   try {
     const { title, note, rating, year, genres } = req.body;
     if (!title || !note || !rating || !year) {
-      return res.redirect("/upload", {
+      return res.render("upload", {
+        pageTitle: "Upload Movie",
         errorMessage:
           "Information on title, note, rating and year must be sent.",
       });
@@ -29,7 +30,10 @@ export const postUpload = async (req, res) => {
     return res.redirect("/");
   } catch (err) {
     console.log(err);
-    return res.redirect("/upload", { errorMessage: "uncaught error" });
+    return res.status(400).render("upload", {
+      pageTitle: "Upload Movie",
+      errorMessage: "Unexpected errors happened.",
+    });
   }
 };
 

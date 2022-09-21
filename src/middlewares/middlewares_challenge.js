@@ -1,3 +1,5 @@
+import multer from "multer";
+
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.loggedInUser;
@@ -34,3 +36,5 @@ export const protectorMiddleware = (req, res, next) => {
   const { path } = req;
   return path === "/protected" ? res.redirect("/") : next();
 };
+
+export const textUploader = multer({ dest: "uploads/texts/" });

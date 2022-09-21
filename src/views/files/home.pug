@@ -1,0 +1,13 @@
+extends ../layouts/layout
+
+block route 
+  h2 files home
+  form(action="/files/read", method="POST", enctype="multipart/form-data")
+    input(type="file", name="text", accept=".txt")
+    input(type="submit", value="Convert")
+  if files
+    div
+      ul
+        each file in files
+          li
+            a(href=`/files/${file}`)=file
