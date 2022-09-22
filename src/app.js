@@ -39,13 +39,14 @@ app.use(
   })
 );
 app.use(localsMiddleware);
+app.use("/uploads", express.static("uploads")); // expose specific folders
+app.use("/assets", express.static("assets"));
 
 app.use("/", globalRouter);
 app.use("/users", usersRouter);
 app.use("/stories", storiesRouter);
 app.use("/movies", movieRouter);
 app.use("/files", filesRouter);
-app.use("/uploads", express.static("uploads")); // expose specific folders
 
 app.get("/protected", protectorMiddleware, () => {
   return res.send("hey get the fuck out");

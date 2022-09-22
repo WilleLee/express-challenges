@@ -1,10 +1,11 @@
 extends ../layouts/layout
+include ../mixins/errorMessage
 
-block route 
-  h2 files home
+block route
   form(action="/files/read", method="POST", enctype="multipart/form-data")
     input(type="file", name="text", accept=".txt")
     input(type="submit", value="Convert")
+  +errorMessage(errorMessage)
   if files
     div
       ul
