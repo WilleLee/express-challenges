@@ -6,6 +6,8 @@ export const localsMiddleware = (req, res, next) => {
   next();
 };
 
+export const textUploader = multer({ dest: "uploads/texts/" });
+
 export const urlLogger = (req, res, next) => {
   // middleware that logs the recent path
   const { path } = req;
@@ -36,5 +38,3 @@ export const protectorMiddleware = (req, res, next) => {
   const { path } = req;
   return path === "/protected" ? res.redirect("/") : next();
 };
-
-export const textUploader = multer({ dest: "uploads/texts/" });

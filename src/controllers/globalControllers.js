@@ -76,7 +76,7 @@ export const postLogin = async (req, res) => {
     const user = await User.findOne({ username });
     const compare = await bcrypt.compare(password, user.password);
     if (!user || !compare) {
-      return res.render("/login", {
+      return res.render("login", {
         pageTitle: "Login",
         errorMessage: "The user doesn't exist or the password is incorrect.",
       });
@@ -89,5 +89,14 @@ export const postLogin = async (req, res) => {
       pageTitle: "Login",
       errorMessage: "Unexpected errors happened.",
     });
+  }
+};
+export const logout = (req, res) => {
+  try {
+    req.session.destroy();
+    return res.redirect("/");
+  } catch (err) {
+    console.log(err);
+    return res.redirect("/");
   }
 };
