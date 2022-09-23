@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import "./db";
 import express from "express";
+import MongoStore from "connect-mongo";
 //middlewares
 import session from "express-session";
 import morgan from "morgan";
@@ -33,9 +34,15 @@ app.use(morgan("dev"));
 
 app.use(
   session({
-    secret: "hihihihi",
+    secret: process.env.COOKIE_SECRET,
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 3600000,
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+    }),
   })
 );
 app.use(localsMiddleware);
