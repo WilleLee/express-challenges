@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 
 const userSchema = new Schema({
+  naver: { type: Boolean, default: false },
   username: { type: String, required: true },
   useremail: { type: String, required: true, unique: true },
   password: { type: String, required: true },

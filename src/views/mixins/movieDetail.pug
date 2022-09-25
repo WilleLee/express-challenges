@@ -1,6 +1,6 @@
 mixin movieDetail(movie)
   div 
-    video(src=`/${movie.path}`)
+    video(src=`/${movie.path}`, controls, width="1200")
     h2 #{movie.title} (#{movie.year})
     p rated by #{movie.owner.username}
     p=movie.note
