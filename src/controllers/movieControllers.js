@@ -3,7 +3,8 @@ import Movie from "../models/Movie";
 export const movie = async (req, res) => {
   try {
     const { id } = req.params;
-    const movie = await Movie.findById(id);
+    const movie = await Movie.findById(id).populate("owner");
+    //populate method fills the owner part with the actual user object
     if (!movie) {
       return res.status(400).redirect("/");
     }

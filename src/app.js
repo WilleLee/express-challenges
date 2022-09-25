@@ -55,10 +55,6 @@ app.use("/stories", storiesRouter);
 app.use("/movies", movieRouter);
 app.use("/files", filesRouter);
 
-app.get("/protected", protectorMiddleware, () => {
-  return res.send("hey get the fuck out");
-});
-
 app.listen($PORT, () => {
   console.log(`the app is listening to the port ${$PORT}`);
 });

@@ -12,6 +12,9 @@ export const getUpload = async (req, res) => {
 export const postUpload = async (req, res) => {
   try {
     const {
+      loggedInUser: { _id },
+    } = req.session;
+    const {
       file: { path },
     } = req;
     const { title, note, rating, year, genres } = req.body;
@@ -28,8 +31,12 @@ export const postUpload = async (req, res) => {
       rating,
       year,
       genres: genres ? genres.split(",").map((genre) => genre.trim()) : [],
+      owner: _id,
     });
     await movie.save();
+    const user = await User.findById(_id);
+    user.videos.push(movie._id);
+    await user.save();
     return res.redirect("/");
   } catch (err) {
     console.log(err);
@@ -45,12 +52,12 @@ export const join = async (req, res) => {
 };
 export const postJoin = async (req, res) => {
   try {
-    const { username, password, passwordc } = req.body;
-    const existingUser = await User.exists({ username });
+    const { username, useremail, password, passwordc } = req.body;
+    const existingUser = await User.exists({ useremail });
     if (existingUser) {
       return res.status(400).render("join", {
         pageTitle: "Join",
-        errorMessage: "This username has already been taken.",
+        errorMessage: "This useremail has already been taken.",
       });
     }
     if (password !== passwordc) {
@@ -59,7 +66,7 @@ export const postJoin = async (req, res) => {
         errorMessage: "Password confirmation failed.",
       });
     }
-    await User.create({ username, password });
+    await User.create({ username, useremail, password });
     return res.redirect("/login");
   } catch (err) {
     console.log(err.message);
@@ -75,8 +82,8 @@ export const login = (req, res) => {
 };
 export const postLogin = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { useremail, password } = req.body;
+    const user = await User.findOne({ useremail });
     const compare = await bcrypt.compare(password, user.password);
     if (!user || !compare) {
       return res.render("login", {

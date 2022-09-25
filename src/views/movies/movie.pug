@@ -3,8 +3,9 @@ include ../mixins/movieDetail
 
 block route
   +movieDetail(movie)
-  div
-    p
-      a(href=`/movies/${id}/edit`) &rarr; Edit Infos
-    p 
-      a(href=`/movies/${id}/delete`) &rarr; Delete Infos
+  if loggedIn && String(movie.owner._id) === String(loggedInUser._id)
+    div
+      p
+        a(href=`/movies/${id}/edit`) &rarr; Edit Infos
+      p 
+        a(href=`/movies/${id}/delete`) &rarr; Delete Infos
