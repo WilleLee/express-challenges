@@ -8,6 +8,11 @@ export const localsMiddleware = (req, res, next) => {
 
 export const textUploader = multer({ dest: "uploads/texts/" });
 
+export const videoUploader = multer({
+  dest: "uploads/videos/",
+  limits: { fileSize: 30000000 },
+});
+
 export const urlLogger = (req, res, next) => {
   // middleware that logs the recent path
   const { path } = req;

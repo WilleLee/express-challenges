@@ -11,15 +11,18 @@ export const getUpload = async (req, res) => {
 };
 export const postUpload = async (req, res) => {
   try {
+    const {
+      file: { path },
+    } = req;
     const { title, note, rating, year, genres } = req.body;
-    if (!title || !note || !rating || !year) {
+    if (!title || !note || !rating || !year || !path) {
       return res.render("upload", {
         pageTitle: "Upload Movie",
-        errorMessage:
-          "Information on title, note, rating and year must be sent.",
+        errorMessage: "Not Fulfilled",
       });
     }
     const movie = new Movie({
+      path,
       title,
       note,
       rating,

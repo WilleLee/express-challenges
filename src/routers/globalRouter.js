@@ -9,11 +9,15 @@ import {
   postLogin,
   postUpload,
 } from "../controllers/globalControllers";
+import { videoUploader } from "../middlewares/middlewares_challenge";
 
 const globalRouter = express.Router();
 
 globalRouter.get("/", home);
-globalRouter.route("/upload").get(getUpload).post(postUpload);
+globalRouter
+  .route("/upload")
+  .get(getUpload)
+  .post(videoUploader.single("video"), postUpload);
 globalRouter.route("/join").get(join).post(postJoin);
 globalRouter.route("/login").get(login).post(postLogin);
 globalRouter.get("/logout", logout);

@@ -1,5 +1,6 @@
 mixin movieDetail(movie)
   div 
+    video(src=`/${movie.path}`)
     h2 #{movie.title} (#{movie.year})
     p=movie.note
     p=movie.rating
