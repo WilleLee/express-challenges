@@ -12,3 +12,17 @@ export const videoUploader = multer({
   dest: "uploads/videos/",
   limits: { fileSize: 30000000 },
 });
+
+export const publicOnly = (req, res, next) => {
+  if (req.session.loggedIn) {
+    return res.redirect("/");
+  }
+  return next();
+};
+
+export const loggedInUserOnly = (req, res, next) => {
+  if (!req.session.loggedIn) {
+    return res.redirect("/");
+  }
+  return next();
+};
