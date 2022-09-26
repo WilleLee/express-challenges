@@ -1,11 +1,14 @@
 header 
-  h1=pageTitle
-  nav 
-    ul 
-      li
-        a(href="/") Home
-      li 
-        a(href="/upload") Upload
+  div(class="mainLogoContainer")
+    a(href="/")
+      i(class="fa-brands fa-youtube")
+      span ExpressTube
+  form(action="/search", method="GET")
+    input(type="text", name="keyword", placeholder="Search", min="1", max="20")
+    button(type="submit") 
+      i(class="fa-solid fa-magnifying-glass")
+  nav
+    ul
       if !loggedIn
         li 
           a(href="/files") Files
@@ -14,5 +17,11 @@ header
         li 
           a(href="/join") Join
       else
+        li 
+          a(href="/upload")
+            i(class="fa-solid fa-circle-arrow-up")
         li
-          a(href="/logout") Logout
+          a(href="/logout")
+            i(class="fa-solid fa-right-from-bracket")
+        li
+          a(href=`/users/${loggedInUser._id}`) Profile

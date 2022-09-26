@@ -101,8 +101,6 @@ export const naverCallback = async (req, res) => {
       return res.status(response.statusCode).redirect("/login");
     }
     const data = JSON.parse(body);
-    console.log(data);
-    console.log(data.access_token);
     const header = `Bearer ${data.access_token}`;
     const memberApiUrl = "https://openapi.naver.com/v1/nid/me";
     const memberOptions = {
@@ -115,17 +113,15 @@ export const naverCallback = async (req, res) => {
         return res.status(400).redirect("/login");
       }
       const profileData = JSON.parse(memberBody).response;
-      console.log(profileData);
       const { nickname, email } = profileData;
-      console.log(nickname);
-      console.log(email);
 
       (async () => {
         try {
           const existingUser = await User.exists({ useremail: email });
           if (existingUser) {
+            const user = await User.findOne({ useremail: email });
             req.session.loggedIn = true;
-            req.session.loggedInUser = existingUser;
+            req.session.loggedInUser = user;
             console.log("✅ already exising social user");
             return res.redirect("/");
           }
@@ -136,6 +132,7 @@ export const naverCallback = async (req, res) => {
             password: "loggedinasnaver",
           });
           req.session.loggedIn = true;
+          console.log(user);
           req.session.loggedInUser = user;
           console.log("✅ newly welcomed social user");
           return res.redirect("/");
