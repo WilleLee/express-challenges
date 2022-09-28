@@ -7,6 +7,24 @@ export const home = async (req, res) => {
   const movies = await Movie.find({});
   return res.render("home", { pageTitle: "Home", movies });
 };
+
+export const search = async (req, res) => {
+  try {
+    const {
+      query: { keyword },
+    } = req;
+    if (!keyword) {
+      return res.redirect("/");
+    }
+    const movies = await Movie.find({
+      title: { $regex: new RegExp(keyword, "i") },
+    });
+    return res.render("search", { pageTitle: "Search", movies });
+  } catch (err) {
+    return res.status(400).redirect("/");
+  }
+};
+
 export const getUpload = async (req, res) => {
   return res.render("upload", { pageTitle: "Upload Movie" });
 };

@@ -8,6 +8,7 @@ import {
   postJoin,
   postLogin,
   postUpload,
+  search,
 } from "../controllers/globalControllers";
 import {
   loggedInUserOnly,
@@ -18,6 +19,7 @@ import {
 const globalRouter = express.Router();
 
 globalRouter.get("/", home);
+globalRouter.get("/search", search);
 globalRouter
   .route("/upload")
   .get(getUpload)
