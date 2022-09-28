@@ -2,16 +2,15 @@ header
   div(class="mainLogoContainer")
     a(href="/")
       i(class="fa-brands fa-youtube")
-      span ExpressTube
-  form(action="/search", method="GET")
-    input(type="text", name="keyword", placeholder="Search", min="1", max="20")
-    button(type="submit") 
-      i(class="fa-solid fa-magnifying-glass")
+      span.mainLogo__text ExpressTube
+  div(class="searchbarContainer")
+    form(action="/search", method="GET")
+      input(type="text", name="keyword", placeholder="Search", min="1", max="20")
+      button(type="submit") 
+        i(class="fa-solid fa-magnifying-glass")
   nav
     ul
       if !loggedIn
-        li 
-          a(href="/files") Files
         li 
           a(href="/login") Login
         li 
