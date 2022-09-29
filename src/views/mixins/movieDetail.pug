@@ -1,6 +1,12 @@
 mixin movieDetail(movie)
-  div 
-    video(src=`/${movie.path}`, controls, width="1200")
+  div#movieContainer.movieContainer
+    video(src=`/${movie.path}`, controls, width="1200", alt="")
+    div#movieControls
+      button#playBtn Play
+      button#muteBtn Mute
+      input#volumeControl(type="range", min="0", max="1", step="0.1", value="0.5")
+      input#timelineControl(type="range", min="0", step="1", value="0")
+  div.movieInfos
     h2 #{movie.title} (#{movie.year})
     p rated by #{movie.owner.username}
     p=movie.note

@@ -1,9 +1,14 @@
 @import "./reset.scss";
 @import "./variables";
+//components
 @import "./components/header.scss";
+@import "./components/movieDetail.scss";
 
 body {
   background-color: $orange;
+}
+main {
+  margin: 0 auto;
 }
 a {
   text-decoration: none;
