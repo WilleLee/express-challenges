@@ -43,6 +43,17 @@ header {
       }
     }
   }
+  @media screen and (max-width: 774px) {
+    .searchbarContainer {
+      max-width: 320px;
+      margin-left: -50px;
+    }
+  }
+  @media screen and (max-width: 574px) {
+    .searchbarContainer {
+      max-width: 220px;
+    }
+  }
 }
 
 .mainLogoContainer {
