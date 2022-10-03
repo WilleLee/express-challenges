@@ -1,16 +1,22 @@
 @import "./reset.scss";
 @import "./variables";
+//screens
+@import "./screens/user.scss";
 //components
 @import "./components/header.scss";
 @import "./components/movieDetail.scss";
+@import "./components/footer.scss";
 
 body {
   background-color: $orange;
 }
 main {
-  margin: 0 auto;
+  margin: 0 20px auto;
+  min-height: 80vh;
+}
+a:not([class="footer__link"]) {
+  text-decoration: none;
 }
 a {
-  text-decoration: none;
   color: inherit;
 }

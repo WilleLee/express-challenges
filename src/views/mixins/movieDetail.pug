@@ -1,16 +1,21 @@
 mixin movieDetail(movie)
-  div#movieContainer.movieContainer
-    video(src=`/${movie.path}`, width="1200", alt="")
-    div#movieControls
-      button#playBtn Play
-      button#muteBtn Mute
-      input#volumeControl(type="range", min="0", max="1", step="0.1", value="0.5")
-      div.timelineContainer
-        div.timelineValue
-          span#curTime 00:00
-          span /
-          span#ttlTime 00:00
-        input#timelineControl(type="range", min="0", step="1", value="0")
+  div#movieFrame.movieFrame
+    div.movieContainer
+      video(src=`/${movie.path}`, width="1200", alt="")
+      div#movieControls.movieControls
+        div.movieControls__timeline
+          input#timelineControl(type="range", min="0", step="1", value="0")
+        div.movieControls__btns
+          button#playBtn
+            i.fa-solid.fa-play
+          div.movieControls__volumeControls
+            button#muteBtn
+              i.fa-solid.fa-volume-high
+            input#volumeControl.movieControls__volumeControl(type="range", min="0", max="1", step="0.1", value="0.5")
+          div.movieControls__times
+            span#curTime 00:00
+            span /
+            span#ttlTime 00:00
   div.movieInfos
     h2 #{movie.title} (#{movie.year})
     p rated by #{movie.owner.username}

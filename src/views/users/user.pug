@@ -2,5 +2,11 @@ extends ../layouts/layout
 include ../mixins/movieList
 
 block route
-  h2 #{user.username}'s Profile
+  section.profileHeader
+    div.profileImgContainer
+      if user.profile_image
+        img(src=user.profile_image, alt="")
+      else
+        span=user.username
+    h2 #{user.username}'s Profile
   +movieList(user.videos)

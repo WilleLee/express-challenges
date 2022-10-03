@@ -5,6 +5,8 @@ const volumeControl = document.getElementById("volumeControl");
 const timelineControl = document.getElementById("timelineControl");
 const curTime = document.getElementById("curTime");
 const ttlTime = document.getElementById("ttlTime");
+const movieFrame = document.getElementById("movieFrame");
+const movieControls = document.getElementById("movieControls");
 
 video.volume = volumeControl.value;
 
@@ -27,14 +29,14 @@ const handlePlayBtn = () => {
  */
 const handleVideoPlayed = () => {
   //when the video gets played
-  playBtn.innerText = "Pause";
+  playBtn.innerHTML = "<i class='fa-solid fa-pause'></i>";
 };
 /**
  * function to change contents of playBtn when the video is being paused
  */
 const handleVideoPaused = () => {
   //when the video gets paused
-  playBtn.innerText = "Play";
+  playBtn.innerHTML = "<i class='fa-solid fa-play'></i>";
 };
 
 /**
@@ -63,12 +65,17 @@ const handleVolumeControl = (event) => {
   // the default value of input is string so that it must be altered to number in order to adjust muteBtn.innerText using the conditional statement below
   value > 0 ? handleVideoUnmuted() : handleVideoMuted();
 };
-
+/**
+ * function to change the content of muteBtn when the video is muted
+ */
 const handleVideoMuted = () => {
-  muteBtn.innerText = "Unmute";
+  muteBtn.innerHTML = "<i class='fa-solid fa-volume-xmark'></i>";
 };
+/**
+ * function to change the content of muteBtn when the video is unmuted
+ */
 const handleVideoUnmuted = () => {
-  muteBtn.innerText = "Mute";
+  muteBtn.innerHTML = "<i class='fa-solid fa-volume-high'></i>";
 };
 
 const handleLoadedmetadata = () => {
@@ -96,6 +103,13 @@ const handleTimelineControl = (event) => {
   video.currentTime = value;
 };
 
+const handleMousemove = () => {
+  movieControls.classList.add("appear");
+};
+const handleMouseleave = () => {
+  movieControls.classList.remove("appear");
+};
+
 // play or pause the video
 playBtn.addEventListener("click", handlePlayBtn);
 video.addEventListener("play", handleVideoPlayed);
@@ -108,3 +122,6 @@ volumeControl.addEventListener("input", handleVolumeControl);
 video.addEventListener("loadedmetadata", handleLoadedmetadata);
 video.addEventListener("timeupdate", handleTimeupdate);
 timelineControl.addEventListener("input", handleTimelineControl);
+// handle movieControls appearance
+movieFrame.addEventListener("mousemove", handleMousemove);
+movieFrame.addEventListener("mouseleave", handleMouseleave);

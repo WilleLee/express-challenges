@@ -1,0 +1,17 @@
+footer {
+  color: white;
+  background-color: $footer_bg;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.footer__links {
+  display: flex;
+  gap: 10px;
+  span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}

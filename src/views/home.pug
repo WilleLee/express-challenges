@@ -2,6 +2,4 @@ extends layouts/layout
 include mixins/movieList
 
 block route 
-  if loggedIn 
-    h2 hello, #{loggedInUser.username}
   +movieList(movies)

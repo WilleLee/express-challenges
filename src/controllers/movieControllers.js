@@ -44,6 +44,7 @@ export const postEditMovie = async (req, res) => {
       return res.status(400).redirect("/");
     }
     await Movie.findByIdAndUpdate(id, {
+      path: movie.path,
       title,
       note,
       rating,

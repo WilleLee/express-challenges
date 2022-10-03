@@ -131,7 +131,8 @@ export const naverCallback = async (req, res) => {
         return res.status(400).redirect("/login");
       }
       const profileData = JSON.parse(memberBody).response;
-      const { nickname, email } = profileData;
+      console.log(profileData);
+      const { nickname, email, profile_image } = profileData;
 
       (async () => {
         try {
@@ -148,6 +149,7 @@ export const naverCallback = async (req, res) => {
             useremail: email,
             naver: true,
             password: "loggedinasnaver",
+            profile_image,
           });
           req.session.loggedIn = true;
           console.log(user);
