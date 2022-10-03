@@ -2,10 +2,14 @@ extends layouts/layout
 
 block route 
   include partials/errorMessage
-  form(method="POST")
-    input(type="email", name="useremail", required, placeholder="****@****")
-    input(type="password", name="password", required, placeholder="********")
-    input(type="submit", value="Login")
-    div
+  form.accountForm(method="POST")
+    div.accountForm__container
+      label(for="login__useremail") E-Mail
+      input(type="email", id="login__useremail", name="useremail", required, placeholder="****@****")
+    div.accountForm__container
+      label(for="login__password") Password
+      input(type="password", id="login__password", name="password", required, placeholder="********")
+    div.accountForm__btns
+      input.accountForm__submit(type="submit", value="Login")
       a(href=apiUrl) 
         img(height="30", src="http://static.nid.naver.com/oauth/small_g_in.PNG")

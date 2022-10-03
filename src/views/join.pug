@@ -2,9 +2,20 @@ extends layouts/layout
 
 block route 
   include partials/errorMessage
-  form(method="POST")
-    input(type="text", name="username", required, placeholder="username")
-    input(type="email", name="useremail", required, placeholder="useremail")
-    input(type="password", name="password", required, placeholder="********")
-    input(type="password", name="passwordc", required, placeholder="********")
-    input(type="submit", value="Create Account")
+  form.accountForm(method="POST")
+    div.accountForm__container
+      label(for="join_username") Name to Use
+      input(type="text", id="join_username", name="username", required, placeholder="username")
+    div.accountForm__container
+      label(for="join_useremail") E-Mail
+      input(type="email", id="join_useremail", name="useremail", required, placeholder="useremail")
+    div.accountForm__container
+      label(for="join_password") Password
+      input(type="password", id="join_password", name="password", required, placeholder="********")
+    div.accountForm__container
+      label(for="join_passwordc") Password Again
+      input(type="password", id="join_passwordc" name="passwordc", required, placeholder="********")
+    div.accountForm__btns
+      input.accountForm__submit(type="submit", value="Create Account")
+      a(href=apiUrl) 
+        img(height="30", src="http://static.nid.naver.com/oauth/small_g_in.PNG")

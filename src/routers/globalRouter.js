@@ -23,7 +23,7 @@ globalRouter.get("/search", search);
 globalRouter
   .route("/upload")
   .get(getUpload)
-  .post(videoUploader.single("video"), postUpload);
+  .post(videoUploader.single("videoFile"), postUpload);
 globalRouter.route("/join").all(publicOnly).get(join).post(postJoin);
 globalRouter.route("/login").all(publicOnly).get(login).post(postLogin);
 globalRouter.get("/logout", loggedInUserOnly, logout);

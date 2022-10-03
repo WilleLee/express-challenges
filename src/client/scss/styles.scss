@@ -6,12 +6,16 @@
 @import "./components/header.scss";
 @import "./components/movieDetail.scss";
 @import "./components/footer.scss";
+@import "./components/movieList.scss";
+@import "./components/accountForm.scss";
 
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: $orange;
 }
 main {
-  margin: 0 20px auto;
   min-height: 80vh;
 }
 a:not([class="footer__link"]) {

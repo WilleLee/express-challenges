@@ -1,8 +1,10 @@
 mixin movieList(movies)
-  div 
+  div.movieList
     if !movies.length
       p there's no movie! 
     else
       each movie in movies 
-        p
-          a(href=`/movies/${movie._id}`)=movie.title
+        div.movieList__linkContainer
+          a(href=`/movies/${movie._id}`)
+            div.movieList__titleContainer
+              p=movie.title

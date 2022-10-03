@@ -6,6 +6,7 @@ module.exports = {
     main: "./src/client/js/main.js",
     moviePlayer: "./src/client/js/moviePlayer.js",
     recorder: "./src/client/js/recorder.js",
+    movieUploader: "./src/client/js/movieUploader.js",
   },
   mode: "development",
   watch: true,

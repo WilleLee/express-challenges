@@ -67,7 +67,10 @@ export const postUpload = async (req, res) => {
 };
 
 export const join = async (req, res) => {
-  return res.render("join", { pageTitle: "Join" });
+  const redirectUri = encodeURI("http://localhost:3000/users/naver/callback");
+  const state = "RANDOM_STATE";
+  const apiUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${redirectUri}&state=${state}`;
+  return res.render("join", { pageTitle: "Join", apiUrl });
 };
 export const postJoin = async (req, res) => {
   try {

@@ -2,12 +2,28 @@ extends layouts/layout
 
 block route
   include partials/errorMessage
-  form(method="POST", enctype="multipart/form-data")
-    label(for="video") Upload a Video File
-    input(id="video", type="file", name="video", required, accept="video/*")
-    input(type="text", name="title", required, minlength="2", placeholder="movie title")
-    input(type="text", name="note", required, minlength="4", placeholder="your notes on the movie")
-    input(type="number", name="rating", required, min="0", max="5", step="0.5", placehodler=2.5)
-    input(type="number", name="year", required, min="1900", max="2300", step="1", placehodler=2022)
-    input(type="text", name="genres", placeholder="divide using commas")
-    input(type="submit", value="upload")
+  form.accountForm(method="POST", enctype="multipart/form-data")
+    div.accountForm__container
+      label(for="videoFile") Upload a Video File
+      div.videoFileContainer
+        p#videoFilename
+        input(id="videoFile", type="file", name="videoFile", required, accept="video/*", multiple="false")
+    div.accountForm__container
+      label Title
+      input(type="text", name="title", required, minlength="2", maxlength="14", placeholder="movie title")
+    div.accountForm__container
+      label Description
+      input(type="text", name="note", required, minlength="4", placeholder="your notes on the movie")
+    div.accountForm__container
+      label Rating
+      input(type="number", name="rating", required, min="0", max="5", step="0.5", placeholder="2.5")
+    div.accountForm__container
+      label Filmed in
+      input(type="number", name="year", required, min="1900", max="2300", step="1", placeholder="2022")
+    div.accountForm__container
+      label Genres
+      input(type="text", name="genres", placeholder="separated by commas")
+    div.accountForm__btns
+      input(type="submit", value="upload")
+block scripts
+  script(src="/static/js/movieUploader.js") 
