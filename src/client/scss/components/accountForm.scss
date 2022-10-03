@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 390px;
-  margin: 40px auto auto;
+  margin: 40px auto 40px;
   input {
     all: unset;
   }
@@ -84,8 +84,10 @@
   align-items: center;
   gap: 5px;
   .accountForm__submit {
+    width: 60px;
     height: 30px;
     padding: 0 10px;
+    text-align: center;
     cursor: pointer;
     color: white;
     background-color: orangered;

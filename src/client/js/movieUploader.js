@@ -14,6 +14,4 @@ const handleFileChange = (e) => {
   }
 };
 
-console.log(videoFile.value);
-
 videoFile.addEventListener("change", handleFileChange);

@@ -6,12 +6,16 @@ footer {
   flex-direction: column;
   gap: 15px;
 }
+.footer__copyright {
+  font-size: 12px;
+}
 .footer__links {
   display: flex;
   gap: 10px;
-  span {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+  font-size: 14px;
+}
+.footer__link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
