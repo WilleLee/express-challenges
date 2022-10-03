@@ -48,6 +48,7 @@ app.use(
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads")); // expose specific folders
 app.use("/static", express.static("assets"));
+app.use("/public", express.static("public"));
 
 app.use("/", globalRouter);
 app.use("/users", usersRouter);
