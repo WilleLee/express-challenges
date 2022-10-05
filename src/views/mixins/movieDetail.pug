@@ -6,21 +6,25 @@ mixin movieDetail(movie)
         div.movieControls__timeline
           input#timelineControl(type="range", min="0", step="1", value="0")
         div.movieControls__btns
-          button#playBtn
-            i.fa-solid.fa-play
-          div.movieControls__volumeControls
-            button#muteBtn
-              i.fa-solid.fa-volume-high
-            input#volumeControl.movieControls__volumeControl(type="range", min="0", max="1", step="0.1", value="0.5")
-          div.movieControls__times
-            span#curTime 00:00
-            span /
-            span#ttlTime 00:00
+          div.movieControls__leftBtns
+            button#playBtn
+              i.fa-solid.fa-play
+            div.movieControls__volumeControls
+              button#muteBtn
+                i.fa-solid.fa-volume-high
+              input#volumeControl.movieControls__volumeControl(type="range", min="0", max="1", step="0.1", value="0.5")
+            div.movieControls__times
+              span#curTime 00:00
+              span /
+              span#ttlTime 00:00
+          button#fullscreenBtn.movieControls__fullscreenBtn
+            i.fa-solid.fa-expand
   div.movieInfos
     h2 #{movie.title} (#{movie.year})
-    p rated by #{movie.owner.username}
-    p=movie.note
-    p=movie.rating
+    p.movieInfos__owner rated by 
+      a.movieInfos__ownerName(href=`/users/${String(movie.owner._id)}`) #{movie.owner.username}
+    p.movieInfos__description=movie.note
+    p.movieInfos__rating=movie.rating
     ul
       each genre of movie.genres
         li=genre

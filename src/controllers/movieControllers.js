@@ -8,7 +8,11 @@ export const movie = async (req, res) => {
     if (!movie) {
       return res.status(400).redirect("/");
     }
-    return res.render("movies/movie", { pageTitle: movie.title, movie, id });
+    return res.render("movies/movie", {
+      pageTitle: movie.title,
+      movie,
+      id,
+    });
   } catch (err) {
     console.log(err);
     return res.status(400).redirect("/");
