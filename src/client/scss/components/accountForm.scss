@@ -78,7 +78,7 @@
 }
 
 .accountForm__btns {
-  margin-top: 20px;
+  margin: 10px auto 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,10 +99,21 @@
     &:focus {
       opacity: 1;
     }
+    &.password {
+      width: 120px;
+    }
   }
   a {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.accountForm__links {
+  color: white;
+  font-size: 14px;
+  &:hover {
+    text-decoration: underline;
   }
 }

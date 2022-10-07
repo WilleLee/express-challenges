@@ -1,0 +1,14 @@
+extends ../layouts/layout
+
+block route
+  include ../partials/errorMessage
+  form.accountForm(method="POST")
+    div.accountForm__container
+      label(for="edit_username") Name to Use
+      input(type="text", id="edit_username", name="username", required, value=user.username)
+    div.accountForm__btns
+      input.accountForm__submit(type="submit", value="Confirm")
+    if !Boolean(loggedInUser.naver)
+      div.accountForm__links
+        p
+          a(href=`/users/${id}/edit/password`) &rarr; Change Password?

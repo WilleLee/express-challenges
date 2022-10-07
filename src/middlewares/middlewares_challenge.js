@@ -5,6 +5,12 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.loggedInUser = req.session.loggedInUser || {};
   next();
 };
+export const ownMembersOnly = (req, res, next) => {
+  if (req.session.loggedInUser.naver) {
+    return res.redirect("/");
+  }
+  return next();
+};
 
 export const textUploader = multer({ dest: "uploads/texts/" });
 

@@ -94,21 +94,21 @@ export const postJoin = async (req, res) => {
     console.log(err.message);
     return res.status(400).render("join", {
       pageTitle: "Join",
-      errorMessage: "unexprected errors happened",
+      errorMessage: "unexpected errors happened",
     });
   }
 };
-
+const naverRedirectUri = encodeURI(
+  "http://localhost:3000/users/naver/callback"
+);
 export const login = (req, res) => {
-  const redirectUri = encodeURI("http://localhost:3000/users/naver/callback");
   const state = "RANDOM_STATE";
-  const apiUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${redirectUri}&state=${state}`;
+  const apiUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${naverRedirectUri}&state=${state}`;
   return res.render("login", { pageTitle: "Login", apiUrl });
 };
 export const naverCallback = async (req, res) => {
   const { code, state } = req.query;
-  const redirectUri = encodeURI("http://localhost3000/users/naver/callback");
-  const apiUrl = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_SECRET}&redirect_uri=${redirectUri}&code=${code}&state=${state}`;
+  const apiUrl = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_SECRET}&redirect_uri=${naverRedirectUri}&code=${code}&state=${state}`;
   const options = {
     url: apiUrl,
     Headers: {

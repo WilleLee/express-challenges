@@ -9,4 +9,6 @@ block route
       else
         span=user.username
     h2 #{user.username}'s Profile
+    p 
+      a(href=`/users/${id}/edit`) &rarr; edit my profile
   +movieList(user.videos)
