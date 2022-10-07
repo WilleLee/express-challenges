@@ -8,6 +8,7 @@ const movieSchema = new Schema({
   year: { type: Number, required: true },
   genres: [String],
   owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 const Movie = mongoose.model("Movie", movieSchema);

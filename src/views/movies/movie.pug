@@ -9,5 +9,15 @@ block route
         a(href=`/movies/${id}/edit`) &rarr; Edit Infos
       p 
         a(href=`/movies/${id}/delete`) &rarr; Delete Movie
+  div.movie__commentContainer
+    if loggedIn
+      form.movie__commentForm#commentForm
+        textarea.movie__commentArea#commentArea(name="commentArea", cols="60", rows="1")  
+        input.movie__commentBtn#commentBtn(type="submit", value="Confirm")
+    ul
+      each comment in movie.comments.reverse()
+        li(data-id=comment._id)=comment.text
 block scripts
   script(src="/static/js/moviePlayer.js") 
+  if loggedIn
+    script(src="/static/js/commentSection.js")
