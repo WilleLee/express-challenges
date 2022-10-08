@@ -30,5 +30,20 @@ export const postComment = async (req, res) => {
   }
 };
 export const deleteComment = async (req, res) => {
-  return res.end();
+  try {
+    // id(commentId) 받아서 삭제
+    const {
+      params: { id },
+      session: { loggedIn },
+    } = req;
+    const existing = await Comment.exists({ _id: id });
+    if (!loggedIn || !existing) {
+      return res.sendStatus(404);
+    }
+    await Comment.findByIdAndDelete(id);
+    return res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(404);
+  }
 };

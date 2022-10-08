@@ -3,9 +3,14 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 import request from "request";
 
+const $HOME = "Home";
+const $SEARCH = "Search";
+const $JOIN = "Join";
+const $LOGIN = "Login";
+
 export const home = async (req, res) => {
   const movies = await Movie.find({});
-  return res.render("home", { pageTitle: "Home", movies });
+  return res.render("home", { pageTitle: $HOME, movies });
 };
 
 export const search = async (req, res) => {
@@ -19,7 +24,7 @@ export const search = async (req, res) => {
     const movies = await Movie.find({
       title: { $regex: new RegExp(keyword, "i") },
     });
-    return res.render("search", { pageTitle: "Search", movies });
+    return res.render("search", { pageTitle: $SEARCH, movies });
   } catch (err) {
     return res.status(400).redirect("/");
   }
@@ -78,13 +83,13 @@ export const postJoin = async (req, res) => {
     const existingUser = await User.exists({ useremail });
     if (existingUser) {
       return res.status(400).render("join", {
-        pageTitle: "Join",
+        pageTitle: $JOIN,
         errorMessage: "This useremail has already been taken.",
       });
     }
     if (password !== passwordc) {
       return res.status(400).render("join", {
-        pageTitle: "Join",
+        pageTitle: $JOIN,
         errorMessage: "Password confirmation failed.",
       });
     }
@@ -93,7 +98,7 @@ export const postJoin = async (req, res) => {
   } catch (err) {
     console.log(err.message);
     return res.status(400).render("join", {
-      pageTitle: "Join",
+      pageTitle: $JOIN,
       errorMessage: "unexpected errors happened",
     });
   }
@@ -134,7 +139,7 @@ export const naverCallback = async (req, res) => {
         return res.status(400).redirect("/login");
       }
       const profileData = JSON.parse(memberBody).response;
-      console.log(profileData);
+      //console.log(profileData); {id: String, nickname: String, profile_image: String, email: String}
       const { nickname, email, profile_image } = profileData;
 
       (async () => {
@@ -155,7 +160,6 @@ export const naverCallback = async (req, res) => {
             profile_image,
           });
           req.session.loggedIn = true;
-          console.log(user);
           req.session.loggedInUser = user;
           console.log("✅ newly welcomed social user");
           return res.redirect("/");
@@ -174,13 +178,13 @@ export const postLogin = async (req, res) => {
     const compare = await bcrypt.compare(password, user.password);
     if (user.naver) {
       return res.render("login", {
-        pageTitle: "Login",
+        pageTitle: $LOGIN,
         errorMessage: "Please log in through NAVER",
       });
     }
     if (!user || !compare) {
       return res.render("login", {
-        pageTitle: "Login",
+        pageTitle: $LOGIN,
         errorMessage: "The user doesn't exist or the password is incorrect.",
       });
     }
@@ -189,14 +193,15 @@ export const postLogin = async (req, res) => {
     return res.redirect("/");
   } catch (err) {
     return res.render("login", {
-      pageTitle: "Login",
+      pageTitle: $LOGIN,
       errorMessage: "Unexpected errors happened.",
     });
   }
 };
 export const logout = (req, res) => {
   try {
-    req.session.destroy();
+    req.session.loggedInUser = {};
+    req.session.loggedIn = false;
     return res.redirect("/");
   } catch (err) {
     console.log(err);

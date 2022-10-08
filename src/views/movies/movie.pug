@@ -9,14 +9,21 @@ block route
         a(href=`/movies/${id}/edit`) &rarr; Edit Infos
       p 
         a(href=`/movies/${id}/delete`) &rarr; Delete Movie
-  div.movie__commentContainer
+  section.commentSection
     if loggedIn
-      form.movie__commentForm#commentForm
-        textarea.movie__commentArea#commentArea(name="commentArea", cols="60", rows="1")  
-        input.movie__commentBtn#commentBtn(type="submit", value="Confirm")
-    ul
+      form.commentSection__commentForm#commentForm
+        textarea#commentArea(name="commentArea", cols="60", rows="1")  
+        input.commentSection__commentBtn(type="submit", value="Confirm")
+    ul.commentSection__comments
       each comment in movie.comments.reverse()
-        li(data-id=comment._id)=comment.text
+        li
+          span.commentSection__comment#commentText(data-id=comment._id)=comment.text
+          if loggedIn && String(loggedInUser._id) === String(comment.owner._id)
+            div.commentSection__commentControls
+              span.commentSection__toggle#commentToggle
+                i.fa-solid.fa-ellipsis-vertical
+              span.commentSection__deleteBtn#commentDeleteBtn
+                i.fa-solid.fa-ellipsis-vertical
 block scripts
   script(src="/static/js/moviePlayer.js") 
   if loggedIn

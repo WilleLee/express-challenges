@@ -3,6 +3,7 @@ import multer from "multer";
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.loggedInUser || {};
+  console.log("loggedIn: " + res.locals.loggedIn);
   next();
 };
 export const ownMembersOnly = (req, res, next) => {

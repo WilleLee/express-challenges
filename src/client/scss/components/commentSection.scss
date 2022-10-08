@@ -1,0 +1,31 @@
+.commentSection__commentForm {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  textarea {
+    resize: none;
+    padding: 5px 10px;
+    background-color: rgba($color: white, $alpha: 0.4);
+    border: transparent 1px solid;
+    border-radius: 5px;
+    &:hover {
+      border: white 1px solid;
+    }
+  }
+  .commentSection__commentBtn {
+    height: 28px;
+    padding: 0 10px;
+    background-color: white;
+    opacity: 0.9;
+    border: none;
+    border-radius: 10px;
+    color: $orange;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.commentSection__commentControls {
+  display: flex;
+}

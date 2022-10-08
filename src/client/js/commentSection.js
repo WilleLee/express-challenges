@@ -1,6 +1,8 @@
 const commentForm = document.getElementById("commentForm");
 const commentArea = document.getElementById("commentArea");
 const video = document.querySelector("video");
+const commentText = document.getElementById("commentText");
+const commentDeleteBtn = document.getElementById("commentDeleteBtn");
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -20,4 +22,15 @@ const handleSubmit = async (event) => {
   }
 };
 
+const handleDeleteBtn = async () => {
+  const commentId = commentText.dataset.id;
+  const response = await fetch(`/api/comments/${commentId}/delete`, {
+    method: "DELETE",
+  });
+  if (response.status === 200) {
+    window.location.reload();
+  }
+};
+
 commentForm.addEventListener("submit", handleSubmit);
+commentDeleteBtn.addEventListener("click", handleDeleteBtn);
