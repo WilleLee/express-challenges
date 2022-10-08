@@ -3,6 +3,8 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 import request from "request";
 
+const heroku = process.env.NODE_ENV || null;
+
 const $HOME = "Home";
 const $SEARCH = "Search";
 const $JOIN = "Join";
@@ -72,7 +74,9 @@ export const postUpload = async (req, res) => {
 };
 
 export const join = async (req, res) => {
-  const redirectUri = encodeURI("http://localhost:3000/users/naver/callback");
+  const redirectUri = heroku
+    ? encodeURI("https://expresstube.herokuapp.com/users/naver/callback")
+    : encodeURI("http://localhost:3000/users/naver/callback");
   const state = "RANDOM_STATE";
   const apiUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${redirectUri}&state=${state}`;
   return res.render("join", { pageTitle: "Join", apiUrl });
@@ -103,9 +107,9 @@ export const postJoin = async (req, res) => {
     });
   }
 };
-const naverRedirectUri = encodeURI(
-  "http://localhost:3000/users/naver/callback"
-);
+const naverRedirectUri = heroku
+  ? encodeURI("https://expresstube.herokuapp.com/users/naver/callback")
+  : encodeURI("http://localhost:3000/users/naver/callback");
 export const login = (req, res) => {
   const state = "RANDOM_STATE";
   const apiUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${naverRedirectUri}&state=${state}`;
