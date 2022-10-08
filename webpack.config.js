@@ -11,8 +11,6 @@ module.exports = {
     movieUploader: $BASE_ENTRY_JS + "movieUploader.js",
     commentSection: $BASE_ENTRY_JS + "commentSection.js",
   },
-  mode: "development",
-  watch: true,
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/styles.css",

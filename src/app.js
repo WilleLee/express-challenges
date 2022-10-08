@@ -1,3 +1,4 @@
+import "regenerator-runtime";
 import * as dotenv from "dotenv";
 dotenv.config();
 
