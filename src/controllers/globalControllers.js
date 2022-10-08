@@ -40,18 +40,19 @@ export const postUpload = async (req, res) => {
     const {
       loggedInUser: { _id },
     } = req.session;
+    console.log(req.file);
     const {
-      file: { path },
+      file: { location },
     } = req;
     const { title, note, rating, year, genres } = req.body;
-    if (!title || !note || !rating || !year || !path) {
+    if (!title || !note || !rating || !year || !location) {
       return res.render("upload", {
         pageTitle: "Upload Movie",
         errorMessage: "Not Fulfilled",
       });
     }
     const movie = new Movie({
-      path,
+      path: location,
       title,
       note,
       rating,

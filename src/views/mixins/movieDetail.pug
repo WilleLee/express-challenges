@@ -1,7 +1,7 @@
 mixin movieDetail(movie)
   div#movieFrame.movieFrame
     div.movieContainer
-      video(src=`/${movie.path}`, width="1200", alt="", data-id=movie._id)
+      video(src=movie.path, width="1200", alt="", data-id=movie._id)
       div#movieControls.movieControls
         div.movieControls__timeline
           input#timelineControl(type="range", min="0", step="1", value="0")
