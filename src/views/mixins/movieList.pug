@@ -1,7 +1,5 @@
 mixin movieList(movies)
-  if !movies.length
-    p there's no movie! 
-  else
+  if movies.length
     div.movieList
       each movie in movies 
         div.movieList__linkContainer

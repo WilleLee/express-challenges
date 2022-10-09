@@ -1,8 +1,12 @@
 const commentForm = document.getElementById("commentForm");
 const commentArea = document.getElementById("commentArea");
 const video = document.querySelector("video");
-const commentText = document.getElementById("commentText");
-const commentDeleteBtn = document.getElementById("commentDeleteBtn");
+const commentDeleteBtns = document.getElementsByClassName(
+  "commentSection__deleteBtn"
+);
+const commentToggles = document.getElementsByClassName(
+  "commentSection__toggle"
+);
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -22,8 +26,8 @@ const handleSubmit = async (event) => {
   }
 };
 
-const handleDeleteBtn = async () => {
-  const commentId = commentText.dataset.id;
+const handleDeleteBtn = async (e) => {
+  const commentId = e.target.dataset.id;
   const response = await fetch(`/api/comments/${commentId}/delete`, {
     method: "DELETE",
   });
@@ -32,5 +36,19 @@ const handleDeleteBtn = async () => {
   }
 };
 
+const handleToggle = (e) => {
+  const deleteBtn = document.getElementById(e.target.dataset.id);
+  deleteBtn.classList.toggle("showing");
+};
+
 commentForm.addEventListener("submit", handleSubmit);
-commentDeleteBtn.addEventListener("click", handleDeleteBtn);
+if (commentDeleteBtns.length) {
+  for (let i = 0; i < commentDeleteBtns.length; i++) {
+    commentDeleteBtns[i].addEventListener("click", handleDeleteBtn);
+  }
+}
+if (commentToggles.length) {
+  for (let i = 0; i < commentToggles.length; i++) {
+    commentToggles[i].addEventListener("click", handleToggle);
+  }
+}

@@ -20,11 +20,24 @@ mixin movieDetail(movie)
           button#fullscreenBtn.movieControls__fullscreenBtn
             i.fa-solid.fa-expand
   div.movieInfos
+    if movie.genres.length
+      ul.movieInfos__genres
+        each genre of movie.genres
+          li ##{genre}
     h2 #{movie.title} (#{movie.year})
-    p.movieInfos__owner rated by 
+    p.movieInfos__owner uploaded by 
       a.movieInfos__ownerName(href=`/users/${String(movie.owner._id)}`) #{movie.owner.username}
+    p.movieInfos__rating
+      span.movieInfos__ratingTransparent
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
+      span.movieInfos__ratingColored#ratingColored(data-id=movie.rating)
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
+        i.fa-solid.fa-star
     p.movieInfos__description=movie.note
-    p.movieInfos__rating=movie.rating
-    ul
-      each genre of movie.genres
-        li=genre

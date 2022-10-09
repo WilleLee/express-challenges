@@ -12,7 +12,12 @@ const s3 = new S3Client({
   credentials: { accessKeyId: s3Params.id, secretAccessKey: s3Params.secret },
   region: s3Params.region,
 });
-const s3Uploader = multerS3({
+const s3VideoUploader = multerS3({
+  s3,
+  bucket: s3Params.bucketName,
+  acl: "public-read",
+});
+const s3ImageUploader = multerS3({
   s3,
   bucket: s3Params.bucketName,
   acl: "public-read",
@@ -23,7 +28,13 @@ export const textUploader = multer({ dest: "uploads/texts/" });
 export const videoUploader = multer({
   dest: "uploads/videos/",
   limits: { fileSize: 30000000 },
-  storage: s3Uploader,
+  storage: s3VideoUploader,
+});
+
+export const imageUploader = multer({
+  dest: "uploads/images/",
+  limits: { fileSize: 500000 },
+  storage: s3ImageUploader,
 });
 
 export const localsMiddleware = (req, res, next) => {

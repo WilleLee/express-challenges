@@ -21,7 +21,7 @@ import usersRouter from "./routers/usersRouter";
 import filesRouter from "./routers/filesRouter";
 import apiRouter from "./routers/apiRouter";
 
-const heroku = process.env.NODE_ENV;
+const heroku = process.env.NODE_ENV || null;
 const $PORT = heroku ? process.env.PORT : 3000;
 const app = express();
 
@@ -30,7 +30,9 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
-app.use(morgan("dev"));
+if (!heroku) {
+  app.use(morgan("dev"));
+}
 // Predefined Formats of morgan
 // "dev" -> :method :url :status :response-time ms - :res[content-length]
 //app.use(morgan(":status :method :url :http-version :response-time ms"));

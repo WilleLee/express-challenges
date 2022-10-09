@@ -40,7 +40,10 @@ export const postEdit = async (req, res) => {
     if (!user) {
       return res.redirect("/");
     }
-    const { username } = req.body;
+    const {
+      body: { username },
+      file: { location },
+    } = req;
     if (!username) {
       return res.render("users/edit", {
         pageTitle: $EditProfile,
@@ -48,8 +51,10 @@ export const postEdit = async (req, res) => {
         errorMessage: "Username must exist.",
       });
     }
+    const profile_image = location || user.profile_image;
     await User.findByIdAndUpdate(id, {
       username,
+      profile_image,
     });
     return res.redirect(`/users/${id}`);
   } catch (err) {

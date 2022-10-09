@@ -10,6 +10,8 @@ module.exports = {
     recorder: $BASE_ENTRY_JS + "recorder.js",
     movieUploader: $BASE_ENTRY_JS + "movieUploader.js",
     commentSection: $BASE_ENTRY_JS + "commentSection.js",
+    imageUploader: $BASE_ENTRY_JS + "imageUploader.js",
+    movieRating: $BASE_ENTRY_JS + "movieRating.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

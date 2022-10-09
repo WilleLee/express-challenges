@@ -4,7 +4,7 @@ include ../mixins/movieDetail
 block route
   +movieDetail(movie)
   if loggedIn && String(movie.owner._id) === String(loggedInUser._id)
-    div
+    div.movie__ownerControls
       p
         a(href=`/movies/${id}/edit`) &rarr; Edit Infos
       p 
@@ -16,15 +16,17 @@ block route
         input.commentSection__commentBtn(type="submit", value="Confirm")
     ul.commentSection__comments
       each comment in movie.comments.reverse()
-        li
-          span.commentSection__comment#commentText(data-id=comment._id)=comment.text
+        li.commentSection__commentContainer
+          span
+            i.fa-solid.fa-comment
+            span #{comment.text}
           if loggedIn && String(loggedInUser._id) === String(comment.owner._id)
             div.commentSection__commentControls
-              span.commentSection__toggle#commentToggle
-                i.fa-solid.fa-ellipsis-vertical
-              span.commentSection__deleteBtn#commentDeleteBtn
-                i.fa-solid.fa-ellipsis-vertical
+              span.commentSection__toggle
+                i.fa-solid.fa-ellipsis-vertical(data-id=comment._id)
+              span.commentSection__deleteBtn(id=comment._id, data-id=comment._id) Delete
 block scripts
   script(src="/static/js/moviePlayer.js") 
+  script(src="/static/js/movieRating.js")
   if loggedIn
     script(src="/static/js/commentSection.js")

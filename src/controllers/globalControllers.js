@@ -40,7 +40,6 @@ export const postUpload = async (req, res) => {
     const {
       loggedInUser: { _id },
     } = req.session;
-    console.log(req.file);
     const {
       file: { location },
     } = req;

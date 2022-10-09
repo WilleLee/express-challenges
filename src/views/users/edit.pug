@@ -2,7 +2,12 @@ extends ../layouts/layout
 
 block route
   include ../partials/errorMessage
-  form.accountForm(method="POST")
+  form.accountForm(method="POST", enctype="multipart/form-data")
+    div.accountForm__container 
+      label(for="imageFile") Profile Image
+      div.accountForm__fileContainer
+        p#imageFilename
+        input(type="file", id="imageFile", name="imageFile", accept="image/*", multiple="false")
     div.accountForm__container
       label(for="edit_username") Name to Use
       input(type="text", id="edit_username", name="username", required, value=user.username)
@@ -12,3 +17,5 @@ block route
       div.accountForm__links
         p
           a(href=`/users/${id}/edit/password`) &rarr; Change Password?
+block scripts
+  script(src="/static/js/imageUploader.js") 

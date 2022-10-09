@@ -5,7 +5,7 @@ block route
   form.accountForm(method="POST", enctype="multipart/form-data")
     div.accountForm__container
       label(for="videoFile") Upload a Video File
-      div.videoFileContainer
+      div.accountForm__fileContainer
         p#videoFilename
         input(id="videoFile", type="file", name="videoFile", required, accept="video/*", multiple="false")
     div.accountForm__container

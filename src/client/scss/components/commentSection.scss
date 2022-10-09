@@ -1,9 +1,14 @@
+.commentSection {
+  width: 550px;
+}
+
 .commentSection__commentForm {
   display: flex;
-  gap: 15px;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  margin: 0 $screen-margin-side 20px;
   textarea {
     resize: none;
+    font-family: inherit;
     padding: 5px 10px;
     background-color: rgba($color: white, $alpha: 0.4);
     border: transparent 1px solid;
@@ -26,6 +31,44 @@
   }
 }
 
-.commentSection__commentControls {
+.commentSection__comments {
+  margin: 0 $screen-margin-side;
+  padding: 0 10px;
   display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background-color: rgba($color: white, $alpha: 0.1);
+  li:first-child {
+    margin-top: 20px;
+  }
+  li:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+.commentSection__commentContainer {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  i {
+    color: $footer-bg;
+  }
+  .commentSection__commentControls {
+    position: relative;
+    .commentSection__toggle {
+      cursor: pointer;
+    }
+    .commentSection__deleteBtn {
+      display: none;
+      cursor: pointer;
+      padding: 3px 5px;
+      position: absolute;
+      bottom: 120%;
+      left: 0;
+      background-color: rgba($color: black, $alpha: 0.4);
+      &.showing {
+        display: block;
+      }
+    }
+  }
 }

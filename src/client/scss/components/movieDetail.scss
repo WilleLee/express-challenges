@@ -78,6 +78,20 @@
 }
 
 .movieInfos {
+  margin: 10px $screen-margin-side;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .movieInfos__genres {
+    margin-left: -5px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    display: flex;
+    gap: 10px;
+    background-color: rgba($color: orangered, $alpha: 0.8);
+    border: none;
+    border-radius: 7px;
+  }
   h2,
   p {
     color: white;
@@ -87,6 +101,8 @@
     font-weight: 800;
   }
   .movieInfos__owner {
+    margin-bottom: 7px;
+    font-size: 14px;
     .movieInfos__ownerName {
       opacity: 0.9;
       font-weight: 800;
@@ -94,6 +110,22 @@
       &:hover {
         opacity: 1;
       }
+    }
+  }
+  .movieInfos__rating {
+    position: relative;
+    margin-bottom: 5px;
+    .movieInfos__ratingTransparent {
+      opacity: 0;
+    }
+    .movieInfos__ratingColored {
+      overflow: hidden;
+      white-space: nowrap;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      color: orangered;
     }
   }
 }

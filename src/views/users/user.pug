@@ -2,13 +2,16 @@ extends ../layouts/layout
 include ../mixins/movieList
 
 block route
-  section.profileHeader
-    div.profileImgContainer
+  section.user__header
+    div.user__profileImgContainer
       if user.profile_image
         img(src=user.profile_image, alt="")
       else
         span=user.username
-    h2 #{user.username}'s Profile
-    p 
-      a(href=`/users/${id}/edit`) &rarr; edit my profile
+    div.user__infos
+      h2 #{user.username}'s Profile
+      if String(loggedInUser._id) === String(user._id)
+        p 
+          a(href=`/users/${id}/edit`) &rarr; 
+            span edit my profile
   +movieList(user.videos)
