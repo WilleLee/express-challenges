@@ -41,6 +41,14 @@ const handleToggle = (e) => {
   deleteBtn.classList.toggle("showing");
 };
 
+const handleResize = () => {
+  if (window.innerWidth <= 570) {
+    commentArea.cols = "50";
+  } else {
+    commentArea.cols = "60";
+  }
+};
+
 commentForm.addEventListener("submit", handleSubmit);
 if (commentDeleteBtns.length) {
   for (let i = 0; i < commentDeleteBtns.length; i++) {
@@ -51,4 +59,9 @@ if (commentToggles.length) {
   for (let i = 0; i < commentToggles.length; i++) {
     commentToggles[i].addEventListener("click", handleToggle);
   }
+}
+
+if (commentForm) {
+  handleResize();
+  window.addEventListener("resize", handleResize);
 }

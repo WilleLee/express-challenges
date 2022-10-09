@@ -10,6 +10,12 @@
     }
   }
 
+  @media screen and (max-width: 1200px) {
+    video {
+      width: 100%;
+    }
+  }
+
   .movieContainer {
     width: 100%;
     display: flex;
