@@ -1,5 +1,63 @@
 # express-challenges
 
+## Deployment
+
+<a href="https://expresstube.herokuapp.com"><img src="https://github.com/WilleLee/files/blob/main/expresstube_thumbnail.png" width="320" alt="expresstube link" /></a>
+
+👆🏻 Click and browse the application
+
+### Heroku
+
+The app is deployed on heroku using Heroku CLI.
+
+```
+git heroku login
+heroku git:clone -a applicationName
+git add .
+git commit -a "hello world to heroku"
+git push heroku main
+```
+
+Before the deployment, both codes for the front-end and the back-end must be interpreted and compressed by "build" script command, and such process can be done by babel and webpack so that the "start" script command like below would be able to run the code inside the build directory to render the website.
+
+```javascript
+// ./package.json
+{
+  "scripts": {
+    "start": "node build/app.js",
+    "build": "npm run build:server && npm run build:assets",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
+    "dev:server": "nodemon",
+    "dev:assets": "webpack --mode=development -w"
+  },
+}
+```
+
+Unlike the port number for the application in development mode can be fixed since this is run on my own memory, Heroku gives a random port number for the application everytime it refreshes, thus the varible of the port number must be changable regarding the environment. Fortunately, heroku throws an environment varible for the production mode callded _NODE_ENV_ so that whether the application gets the value of the varibale or not can be used for the application to decide which value to hand over to the _PORT_ variable like below.
+
+```javascript
+// ./src/app.js
+
+/*
+...
+*/
+
+const heroku = process.env.NODE_ENV || null;
+const $PORT = heroku ? process.env.PORT : 3000;
+const app = express();
+
+/*
+...
+*/
+
+app.listen($PORT, () => {
+  console.log(`the app is listening to the port ${$PORT}`);
+});
+```
+
+This trick is quite useful for specific situations, i.e. if the application offers an OAuth for Naver or GitHub accounts our users have, two separate callback links might be requried, one for the production like _https://applicationName.herokuapp.com/naver/callback_ and another for the development like _http://localhost:3000/naver/callback_. The application now can send users to the appropriate link among two of those since the mode of the application can be defined with _heroku_ variable above.
+
 ## Challenges
 
 ### create middlewares
