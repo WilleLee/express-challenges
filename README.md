@@ -58,6 +58,68 @@ app.listen($PORT, () => {
 
 This trick is quite useful for specific situations, i.e. if the application offers an OAuth for Naver or GitHub accounts our users have, two separate callback links might be requried, one for the production like _https://applicationName.herokuapp.com/naver/callback_ and another for the development like _http://localhost:3000/naver/callback_. The application now can send users to the appropriate link among two of those since the mode of the application can be defined with _heroku_ variable above.
 
+## Development
+
+### Environment
+
+#### Webpack Configuration
+
+Since it is quite usual to use the newest grammar of JavaScript, the written code needs to be interpreted to the old version of JavaScript to be run on multiple browsers. As bebel-node transforms the JS code of the latest version into that of the older version so that Node.JS is able to understand the language, Webpack executes the same process on the front-end side, transforming the written code into the highly compatible code and packing them into one or more bundles.
+
+(many frameworks and libraries offer the pre-set dev environment configured by Webpack so that developers rarely has chance to create any new configuration of Webpack by their own)
+
+To start creating the Webpack bundler for the project, you need to install webpack and webpack-cli, and then create _webpack.config.js_ file on the root directory.
+
+```
+npm install webpack webpack-cli -D
+```
+
+```javascript
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const $BASE_ENTRY_JS = "./src/client/js/";
+
+module.exports = {
+  entry: {
+    main: $BASE_ENTRY_JS + "main.js",
+    moviePlayer: $BASE_ENTRY_JS + "moviePlayer.js",
+    recorder: $BASE_ENTRY_JS + "recorder.js",
+    movieUploader: $BASE_ENTRY_JS + "movieUploader.js",
+    commentSection: $BASE_ENTRY_JS + "commentSection.js",
+    imageUploader: $BASE_ENTRY_JS + "imageUploader.js",
+    movieRating: $BASE_ENTRY_JS + "movieRating.js",
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "css/styles.css",
+    }),
+  ],
+  output: {
+    filename: "js/[name].js",
+    path: path.resolve(__dirname, "assets"),
+    clean: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [["@babel/preset-env"]],
+          },
+        },
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
+    ],
+  },
+};
+```
+
 ## Challenges
 
 ### create middlewares
