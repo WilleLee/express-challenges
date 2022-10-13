@@ -97,6 +97,50 @@ module.exports = {
 };
 ```
 
+### Back-end
+
+#### Express.js
+
+Express.js, a JavaScript framework, helps create the back-end of the application using usual JavaScript syntaxes.
+
+
+```
+npm install express
+```
+
+Since the module is installed, it is possible to start an applicaton right away.
+
+```javascript
+// ./src/app.js
+
+import express from "express"; // or const express = require("express");
+
+const app = express();
+const heroku = process.env.NODE_ENV || null;
+const $PORT = heroku ? process.env.PORT : 3000;
+// if the application is run by heroku, take the given port number,
+// otherwise, the port number for the application (in the dev mode) should be 3000.
+
+app.get("/", (req, res) => {
+  return res.send("hi!");
+});
+// send a string "hi" to the path "/"
+
+app.listen($PORT, () => {
+  console.log(`The application is listening to the port ${$PORT}.`);
+});
+```
+
+#### MongoDB
+
+#### Amazon S3 Bucket
+
+#### Authentication
+
+OAuth with Naver, session, bcrypt ...
+
+### Front-end
+
 ## Challenges
 
 ### create middlewares
