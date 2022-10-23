@@ -131,7 +131,56 @@ app.listen($PORT, () => {
 });
 ```
 
+The express module offers Router() method that creates new router objects connected to appropriate paths, and you can send middlewares/contorller to execute at the exact path.
+
+```javascript
+// ./src/controllers/globalControllers.js
+
+export const home = (req, res) => {
+  // all the express middlewares receive request and response objects as they are called.
+  return res.end();
+};
+```
+
+```javascript
+// ./src/routers/globalRouter.js
+
+import express from "express";
+import { home } from "../controllers/globalControllers.js";
+
+const globalRouter = express.Router();
+
+globalRouter.route("/").get(home);
+
+export default globalRouter;
+```
+
+```javascript
+// ./src/app.js
+
+/*
+...
+*/
+
+app.use("/", globalRouter);
+app.use("/users", usersRouter);
+app.use("/movies", movieRouter);
+app.use("/api", apiRouter);
+
+/*
+...
+*/
+```
+
+There are hundreds of useful objects inside the express object so you will need to browse the document to find what you require [here](https://expressjs.com/en/4x/api.html).
+
 #### MongoDB
+
+The application requires a database to remember users, videos they update, and comments they added possibly so that I connected this app to a mongo atlas using _mongoose_ module which helps make this process so easy.
+
+```
+npm install mongoose
+```
 
 #### Amazon S3 Bucket
 
