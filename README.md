@@ -139,6 +139,7 @@ The express module offers Router() method that creates new router objects connec
 export const home = (req, res) => {
   // all the express middlewares receive request and response objects as they are called.
   return res.end();
+  // end() method simply ends the connection sending nothing.
 };
 ```
 
@@ -182,13 +183,123 @@ The application requires a database to remember users, videos they update, and c
 npm install mongoose
 ```
 
+```javascript
+// ./src/db.js
+
+import * as dotenv from "dotenv";
+dotenv.config();
+import mongoose from "mongoose";
+const mongoUri = process.env.MONGO_URI;
+
+try {
+  mongoose.connect(mongoUri);
+  console.log("✅ connected to the database");
+} catch (error) {
+  console.log(error.message);
+  console.log("❗️ cannot access the database");
+}
+```
+
+The _connect()_ method of mongoose tries to be connected to the mongoDB if you already created your mongoDB account and the mongo atlas. In this case, the exact URI of the mongo atlas is required, but this shouldn't be exposed to the public, rather be saved in _dot.env_ file and used as a property of the _process.env_ object inside the application. Above the _dotenv_ module enables you to use data written in the _dot.env_ file.
+
+The connection can be failed with thousands of reasons, so the error must be handled with _try ... catch_ statement. And export this db.js to the app.js file to execute.
+
+```javascript
+// ./src/app.js
+
+import "./db";
+
+/*
+...
+*/
+```
+
+```
+npm run dev:server
+✅ connected to the database
+The application is listening to the port 3000.
+```
+
+Now the application has its own database, but the data the application might require have no shape. _mongoose_ has Schema object that helps creating **models** which describe the blueprint of the data.
+
+```javascript
+// ./src/models/Movie.js
+
+import mongoose, { Schema } from "mongoose";
+
+const movieSchema = new Schema({
+  path: { type: String, requried: true },
+  title: { type: String, required: true },
+  note: { type: String, required: true },
+  rating: { type: Number, required: true },
+  year: { type: Number, required: true },
+  genres: [String],
+});
+
+const Movie = mongoose.model("Movie", movieSchema);
+
+export default Movie;
+```
+
+As such, you can, for example, decide which contents the data must include and which types those contents must be. And here the data that's created through _movieSchema_ will be saved with name of "Movie" to the mongo atlas, which is quite a way to organize your database so simply.
+
+Since the Movie model is exported by default, it is now possible to CRUD movie data using the databse in other controllers of the application.
+
+```javascript
+// ./src/controllers/movieControllers.js
+
+/*
+...
+*/
+
+export const postEditMovie = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, note, rating, year, genres } = req.body;
+    if (!title || !note || !rating || !year) {
+      return res.status(400).redirect(`/movies/${id}/edit`);
+    }
+    const movie = await Movie.findById(id);
+    if (!movie) {
+      return res.status(400).redirect("/");
+    }
+    await Movie.findByIdAndUpdate(id, {
+      path: movie.path,
+      title,
+      note,
+      rating,
+      year,
+      genres: genres ? genres.split(",").map((genre) => genre.trim()) : [],
+    });
+    return res.status(400).redirect(`/movies/${id}`);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).redirect(`/movies/${id}`);
+  }
+};
+
+/*
+...
+*/
+```
+
+
+
+#### multer and express.static()
+
 #### Amazon S3 Bucket
 
-#### Authentication
+#### Authentication and express-session
 
 OAuth with Naver, session, bcrypt ...
 
 ### Front-end
+
+#### Webpack
+
+#### Fetching
+
+#### Styling File Inputs
 
 ## Challenges
 
