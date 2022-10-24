@@ -283,7 +283,9 @@ export const postEditMovie = async (req, res) => {
 */
 ```
 
+Above the _postEditMovie_ controller receives the _id_ as the parameter and informations for the video file to post from the request object. And the prototype _model_ of mongoose could search for interested data on the database using that _id_ and the _findById()_ method as well as update the data using _findByIdAndUpdate()_ method.
 
+mongoose offers varied kinds of methods to do such CRUD role. Look into the official document [here](https://mongoosejs.com/docs/api/model.html).
 
 #### multer and express.static()
 
