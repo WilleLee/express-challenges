@@ -287,9 +287,9 @@ Above the _postEditMovie_ controller receives the _id_ as the parameter and info
 
 mongoose offers varied kinds of methods to do such CRUD role. Look into the official document [here](https://mongoosejs.com/docs/api/model.html).
 
-#### multer and express.static()
+#### multer and express.static() - static 
 
-#### Amazon S3 Bucket
+#### Amazon S3 Bucket - cloud
 
 #### Authentication and express-session
 
